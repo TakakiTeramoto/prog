@@ -1,0 +1,209 @@
+body,p,h1,h2 {
+    font-family: "ヒラギノ角ゴシック体 W2";
+    font-family: -apple-system,sans-serif;
+}
+
+
+.mos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* height: 50px; */
+    width: 450px;
+}
+
+li{
+   list-style: none;
+}
+
+ul{
+   margin: auto;
+   width: 450px;
+   padding-inline-start: 0;
+   /* list-style-type: none; */
+   margin-block-start: 0em;
+   margin-block-end: 0em;
+}
+
+ul p {
+   color: greenyellow;
+   font-weight: bold;  
+   text-shadow:0 2px 2px green;
+   padding-right: 15px;
+   padding-left: 20px;
+   text-align: center;
+   font-size: 15px;
+}
+
+ul img {
+    height: 50px;
+}
+
+
+text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section.header {
+    width: 450px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+    background-color: yellowgreen;
+}
+
+.header {
+    background: repeating-linear-gradient(-45deg, yellowgreen, yellowgreen 2px, white 2px, white 4px);  
+}
+
+.header p{
+    font-size: 20px;
+    color: green;
+    font-weight: bold;  
+    text-shadow:0 5px 5px green;
+}
+
+.header h1{
+    font-size: 30px;
+    color: green;
+    font-weight: bold;  
+    text-shadow:0 5px 5px green;
+}
+
+.header .gif p{
+    font-size: 15px;
+    color: blue;
+    text-shadow:0 5px 5px blue;
+}
+
+section.gacha {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+    background-color:#FFE7BF;
+}
+
+section.footer {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+    background-color: yellowgreen;
+    width: 450px;
+}
+
+.p .btn-radius {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-radius {
+    margin: 0 auto;
+    text-decoration: none;
+    background: greenyellow;
+    color: rgba(255, 255, 255, 0.47);
+    font-weight: bold;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    border-radius: 50%;
+    border-color: red;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0px 5px 0px green;
+    border: solid 3px green;
+    transition: .4s;
+  }
+
+.btn-radius:hover {
+    padding-top: 5px;
+    /* opacity: 0.5; */
+}
+
+.header .a {
+    font-size: 10px;
+} 
+
+.gif {
+    margin: auto;
+    width: 450px;
+    height: 450px;
+    background-image: url('http://localhost/js_teramoto_22/img/ifmagazine.gif');
+    background-size: 100%;
+    background-position: center center
+} 
+  
+.btn-radius:hover {
+    /* border-style: dashed; */
+    box-shadow: none;
+  }
+
+.gacha{
+    width: 450px;
+    height: 100%;
+}
+
+
+.kekka img{
+    width:150px;
+}
+
+.share-7 {
+    display: inline-block;
+    padding: 0.2em 2.0em;
+    text-decoration: none;
+    user-select: none;
+    background: #55acee;
+    background: linear-gradient(#ffffff 0%, #55acee 10%);
+    border-radius: 20px;
+    transition: 0.4s ease;
+    box-shadow:0px 0px 1px #999;
+}
+
+.share-7:hover {
+    cursor: pointer;
+}
+
+.fa-twitter {
+    font-size: 1.2em;
+    color: #fff;
+}
+
+.fa-twitter:before {
+    content: "\f099";
+}
+
+
+a {
+    color: blue;
+    text-decoration: none;
+}
+
+
+/*その他と主な共通部分は省略*/
+
+a.btn-solid {
+  color: #fff;
+  border-top: 4px solid #48ecc4;
+  border-right: 4px solid #0a5f4a;
+  border-bottom: 4px solid #0f745b;
+  border-left: 4px solid #8cf9de;
+  border-radius: 0;
+  background: #11a37f;
+}
+
+a.btn-solid:hover {
+  color: #fff;
+  border-top: 4px solid #0f745b;
+  border-right: 4px solid #8cf9de;
+  border-bottom: 4px solid #48ecc4;
+  border-left: 4px solid #0a5f4a;
+}
