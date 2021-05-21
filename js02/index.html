@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>ランチつぶやくん</title>
+        <script src="js/jquery-2.1.3.min.js"></script>
+        <link rel="stylesheet" href="css/sample.css" />
+    </head>
+    <body>
+        <header>
+            <h1>ランチつぶやくん</h1>
+            <p>コロナ下で情報共有が中々できないので、<br>自分が行ったお店をみんなに共有しよう！</p>
+        </header>
+        <main>  
+          <div class="Form">
+            <div class="Form-Item">
+              <p class="Form-Item-Label">
+                <span class="Form-Item-Label-Required">必須</span>記入者
+              </p>
+              <input type="text" id="key" class="Form-Item-Input" placeholder="例）寺本貴樹">
+            </div>
+            <div class="Form-Item">
+              <p class="Form-Item-Label">
+                  <span class="Form-Item-Label-Required">必須</span>お店の名前
+              </p>
+              <input type="text" id="memo1" class="Form-Item-Input" placeholder="トラジ田町店">
+            </div>
+            <div class="Form-Item">
+              <p class="Form-Item-Label">
+                  <span class="Form-Item-Label-Required">必須</span>電話番号
+              </p>
+              <input type="text" id="memo2" class="Form-Item-Input" placeholder="例）000-0000-0000">
+            </div>
+            <div class="Form-Item">
+              <p class="Form-Item-Label">
+                  <span class="Form-Item-Label-Required">必須</span>URL
+              </p>
+              <input type="text" id="memo3" class="Form-Item-Input" placeholder="例）https://www.ebisu-toraji.com/shop/tokyo23/minato/tamachi/">
+            </div>
+            <div class="Form-Item">
+                 <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required">必須</span>一言、感想をどうぞ！</p>
+                 <textarea id="memo4" class="Form-Item-Textarea"></textarea>
+            </div>
+                <div class="Form-Item">     
+                <input type="submit" id="save" class="Form-Btn" value="送信する">
+            </div>
+
+    
+            <!-- <input type="submit" id="save" class="Form-Btn" value="送信する"> -->
+          </div>
+            <!-- <textarea id="memo2"></textarea>
+            <textarea id="memo3"></textarea> -->
+            <!-- <ul>
+                <li id="save">Save</li>
+                <li id="clear">Clear</li>
+            </ul> -->
+        </main>
+        <table id="list">
+            <!-- ここに追加データが挿入される -->
+        </table>
+        <div class="Form-Item">
+            <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Require">編集</span>データ加工・保存</span></p>
+            <textarea class="editor1" id="editor1"></textarea>
+        </div>
+        <script>
+            // const STORAGE_KEY = 'memo';
+
+            // let data = [];
+
+            // if(localStorage.getItem(STORAGE_KEY)) {
+            //     data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+            // }
+            // var ck_ed = CKEDITOR.instances.memo4.getData();
+            //1.Save クリックイベント
+            $("#save").on("click", function () {
+                const key = $("#key").val();
+                const value1 = $("#memo1").val();
+                const value2 = $("#memo2").val();
+                const value3 = $("#memo3").val();
+                const value4 = $("#memo4").val();
+
+                //オブジェクトのデータ型を作る
+                //１，オブジェクト
+                //２，jsonのデータの作り方
+
+                let valueObj = {
+                    memo1: value1,
+                    memo2: value2,
+                    memo3: value3,
+                    memo4: value4,
+                };
+                console.log(valueObj);
+                //削除
+                // localStorage.setItem(key,value);
+                // localStorage.setItem("value", JSON.stringify(value));
+                // localStorage.getItem("value");
+                // localStorage.setItem("OBJ", json
+                //削除
+
+                //JSON文字列（オブジェクトをテキスト化）
+                var json = JSON.stringify(valueObj);
+                //JSON文字列をローカルストレージに保存する
+                const json_text = localStorage.setItem(key, json);
+
+                // const json_obj =  JSON.parse(localStorage.getItem(obj));
+
+                // console.log(json_text);
+                // JSON.parse(localStorage.getItem(obj));
+
+                const html = `
+//     <tr>
+//          <th>${key}</th>
+//          <td>${value1}</td>
+//          <td>${value2}</td>
+//          <td>${value3}</td>
+//          <td>${value4}</td>
+//     </tr>
+//     `;       
+                $("#list").prepend(html);
+
+                // $("#list").append(html);
+
+                $("#key").val("");
+                $("#memo1").val("");
+                $("#memo2").val("");
+                $("#memo3").val("");
+                $("#memo4").val("");
+            });
+
+            //2.clear クリックイベント
+            $("#clear").on("click", function () {
+                localStorage.clear();
+                $("#list").empty();
+            });
+
+
+
+            //3.ページ読み込み：保存データ取得表示
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                // const json_obj =  JSON.parse(localStorage.getItem(obj));
+
+                //localstorageのkeyが何になっているかを調べる
+                console.log("key:",key);
+
+                //そのkeyを元にgetItemで取得できるかを確認する
+                //JSONにしているのでそれをparseを用いて回答してあげる必要がある
+                console.log(localStorage.getItem(key));
+                // コンソールでちゃんと出力されていることがわかったら変数に入れて使いやすい様にする
+                const localStorageData = JSON.parse(localStorage.getItem(key));
+
+                // 個別で格納したデータが出力ができるかちゃんと確認する
+                console.log(localStorageData.memo1);
+                console.log(localStorageData.memo2);
+                console.log(localStorageData.memo3);
+                console.log(localStorageData.memo4);
+
+                // 確認できたならそれを変数に入れる
+                const v1 = localStorageData.memo1;
+                const v2 = localStorageData.memo2;
+                const v3 = localStorageData.memo3;
+                const v4 = localStorageData.memo4;
+
+                //ここのレンプレートリテラルは綺麗に使えてますね‼️
+                const html = `<tr>
+                                <th>${key}</th>
+                                <td>${v1}</td>
+                                <td>${v2}</td>
+                                <td>${v3}</td>
+                                <td>${v4}</td>
+                            </tr>`;
+
+                // const v1 = JSON.parse(localStorage.getItem(valueObj.memo1));
+                // const v2 = JSON.parse(localStorage.getItem(valueObj.memo2));
+                // const v3 = JSON.parse(localStorage.getItem(valueObj.memo1));
+                // const html = `<tr>
+                //     <th>${key}</th>
+                //     <td>${v1}</td>
+                //     <td>${v2}</td>
+                //     <td>${v3}</td>
+                // </tr>
+                // `;
+                // console.log(html);
+
+                //appendだと下に差し込みになる
+                // $("#list").append(html);
+
+                $("#list").prepend(html);
+
+                //現時点ではリロードしてしまうと表記順番が変わってしまいますが、
+                //それは今回の本質ではないので飛ばします
+            }
+        </script>
+
+        <script src="https://cdn.ckeditor.com/4.16.0/full-all/ckeditor.js"></script>
+        <!-- <script>
+        // // エディタへの設定を適用する
+             CKEDITOR.replace('editor', {
+             uiColor: '#EEEEEE',
+             height: 400,
+             });
+        </script> -->
+        <script>
+            //ファイルを開くボタン押下時のファイル読込み処理
+            function onOpenFileChange(event) {
+              const file = event.target.files[0];
+              if(file){
+                filename = file.name;
+                const reader = new FileReader();
+                reader.readAsText(file);
+                reader.onload = () => {
+                    editor.setData( reader.result );
+                };
+              }
+            }
+            
+            //ファイルを開くボタン押下処理
+            function OpenFile(editor) {
+              const input = document.createElement('input');
+              input.type = 'file';
+              input.accept = 'text/html';
+              input.setAttribute('onchange', 'onOpenFileChange(event)');
+              input.click();
+            }
+            
+            //保存ボタン押下処理
+            function SaveFile(editor) {
+              const a = document.createElement('a');
+              a.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(editor.getData());
+              a.download = filename;
+              a.click();
+            }
+            
+            CKEDITOR.on('instanceReady', function (event) {
+                //保存ボタン置換え
+                var overridecmd = new CKEDITOR.command(editor, {exec: SaveFile});
+                event.editor.commands['save'].exec = overridecmd.exec;
+            
+                // //最大化する
+                // event.editor.execCommand('maximize');
+            });
+            
+            let filename = '';
+            //インデント（字下げ）の単位を1文字に変更する
+            CKEDITOR.config.indentUnit = 'em';
+            CKEDITOR.config.indentOffset = 1;
+            //スキンを適用し、見た目を変更する
+            CKEDITOR.config.skin = 'moono'; 
+            //ユーザ定義のCSSを適用する
+            CKEDITOR.config.contentsCss =  [ './style.css']; 
+            const editor = CKEDITOR.replace('editor1');
+            
+            //エディタのプラグインが呼び出される際のcallback
+            editor.on('pluginsLoaded', function(event) {
+              //ファイルを開くボタンを追加する
+              this.ui.addButton('openFile', {
+                label: 'ファイルを開く', 
+                command: 'openFile', 
+                toolbar: 'document,3',  //ボタンを追加するtoolbarと位置を指定
+                icon: 'https://icongr.am/fontawesome/folder-open-o.svg' 
+              });
+              this.addCommand('openFile', {exec: OpenFile});
+            });
+            
+            //ウィンドウを閉じる時に確認メッセージを表示させる
+            window.addEventListener('beforeunload', function(event) {
+              event.preventDefault();
+              event.returnValue = '';
+            });
+            </script>
+       <footer><small>G's</small></footer>
+    </body>
+</html>
