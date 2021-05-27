@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TTChat</title>
+<link rel="stylesheet" href="css/style.css"></rel>
+</head>
+<body>
+
+<!-- コンテンツ表示画面 -->
+<div class="container">
+    <div class="chat-area">
+      <div class="message-container">
+        <!-- <p class="chat-message"></p> -->
+      </div>
+        <!-- <div class="message-container-me"></div> -->
+        <!-- <div class="message-container-you"></div> -->
+    </div>
+    <div class="message-person">
+      <input id="me" type="radio" value="me" name="person" checked="checked">
+      <label for="me">自分</label>
+      <input id="you" type="radio" value="you" name="person">
+      <label for="you">相手</label>
+    </div>
+    <div class="message-area">
+      <div class="message-area-text">
+        <!-- <div>名前<input type="text" id="username"></div> -->
+        <textarea id="text"></textarea>
+      </div>
+      <div class="message-area-button">
+        <button id="send" class="disabled-button">送信</button>
+      </div>
+    </div>
+</div>
+
+
+
+<!--/ コンテンツ表示画面 -->
+<!-- 以下JavaScript領域 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+
+<!-- 以下Firebase -->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-database.js"></script> 
+
+<script src="env/firebase_init.js"></script>
+
+<script type="text/javascript">
+
+
+let newPostRef = firebase.database().ref();
+ 
+const nowDate = new Date()
+const hour    = (nowDate.getHours() >= 10) ? nowDate.getHours() : '0' + nowDate.getHours()
+const minutes    = (nowDate.getMinutes() >= 10) ? nowDate.getMinutes() : '0' + nowDate.getMinutes()
+const nowTime = hour + ':' + minutes
+console.log(hour + ':' + minutes)
+const chatArea = $('.chat-area')
+const messageText = $('#text').val()
+
+// // メッセージを表示するdiv要素
+// const messageContainer = $('<div></div>').addClass('message-container')
+// // 現在時間を表現するpタグを用意
+// const sendTime = $('<p></p>').text(nowTime).addClass('chat-time')
+
+// // チャットメッセージ用の装飾をしたクラスを当てたpタグを追加
+// const message = $('<p></p>').addClass('chat-message').text(messageText)
+
+// // 自分 or 相手どちらにメッセージを送る予定かを取得
+// const messagePerson = $('input[name="person"]:checked').val()
+
+// // 自分の時は自分用のメッセージのクラスをつける
+// if (messagePerson === 'me') {
+// messageContainer.addClass('message-container-me')
+// } else {
+// // 相手の時は相手用のメッセージのクラスをつける
+// messageContainer.addClass('message-container-you')
+// }
+
+//送信処理
+$("#send").on("click", function(){
+    newPostRef.push({
+        // time: $("#chat-time").val(),
+        // username: $("#username").val(),
+        text: $("#text").val(),
+        messagePerson: $('input[name="person"]:checked').val(),
+        date: hour + ':' + minutes,
+        // chatArea = $('.chat-area'),
+        // message = $('<p></p>').addClass('chat-message').text(messageText)
+    });
+    chatArea.scrollTop(chatArea[0].scrollHeight)
+    $("#text").val("");
+});  
+
+//送信処理2
+$("#text").on("keydown",function(e){
+    // console.log(e,'eventデータの塊')
+    var now = new Date();
+    if(e.keyCode === 13) {
+        newPostRef.push({
+          // username: $("#username").val(),
+          text: $("#text").val(),
+          messagePerson: $('input[name="person"]:checked').val(),
+          date: nowTime,
+    });
+    chatArea.scrollTop(chatArea[0].scrollHeight)
+    $("#text").val("");
+    }
+});
+
+
+//受信処理
+newPostRef.on("child_added",function(data){
+const messageContainer = $('<div></div>');
+    const v = data.val();
+    const k = data.key;
+    // console.log(v);
+       let str = '';
+    str += '<h6>'
+    str += v.date;
+    str += '</h6>'; 
+    // str += v.username;
+    // str += '<br>';
+    str += '<p>'
+    str += v.text;
+    str += '</p>';
+    let messagePerson = v.messagePerson;
+    if (messagePerson === 'me') {
+       messageContainer.addClass('message-container-me')
+       } else {
+    // 相手の時は相手用のメッセージのクラスをつける
+       messageContainer.addClass('message-container-you')
+       }
+       messageContainer.html(str);
+       $('.chat-area').append(messageContainer);
+});
+
+
+
+</script>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
