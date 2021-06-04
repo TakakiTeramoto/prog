@@ -1,4 +1,7 @@
-■実装したこと
+■実装したこと　
+
+※提出については、Slackで相談させて頂きjsファイルのみとしております。森田先生からもスラックで返答があり、Google Apps Script（GAS）に記載するjsの記述（説明も含め）の提出とREADME.mdでLINEMessagingAPIの設定と使用したAPIの説明をすれば問題ない旨を連絡頂いております。ご確認ください。
+※とはいえ、イメージがつきにくいかと思いますのでまずはアップロードしたmp4の動画を確認して頂き、jsファイルを確認を頂けますと幸いです。
 
 ①Line Developersの利用登録
 https://developers.line.biz/ja/
