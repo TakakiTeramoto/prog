@@ -3,7 +3,7 @@
 <br> 
 <h2>phpを活用し、登録／表示ができている内容</h2>
 <h3>課題：五大ウィスキーが楽しめる通販サイト</h3>
-<a href="http://with-food.site/ec2/index.php">リンク</a>
+<a href="http://with-food.site/ec2/index.php" target="_blank">リンク</a>
 <br>
 <h6>確認方法</h6>
 <p>C:\xampp\htdocs 以下にフォルダごとコピー</p>
