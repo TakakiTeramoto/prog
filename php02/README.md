@@ -1,7 +1,7 @@
 <h1>①課題内容（どんな作品か）</h1>
 <h1>phpを活用し、登録／表示ができる</h1>
 <h1>内容：五大ウィスキーが楽しめる通販サイト</h3>
-<h1>名称：LOVE Whiskey?</h1>
+<h1>名称：LOVE Whiskey</h1>
 
 <a href="http://with-food.site/ec2/index.php" target="_blank">リンク</a>
 <h6>確認方法</h6>
